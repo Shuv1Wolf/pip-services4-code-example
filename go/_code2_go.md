@@ -13,8 +13,8 @@ config.yml
 # Performance counter that post values to log
 - descriptor: "pip-services:counters:log:default:1.0"
 
-# Controller
-- descriptor: "hello-world:controller:default:default:1.0"
+# Service
+- descriptor: "hello-world:service:default:default:1.0"
   default_name: "World"
 
 # Shared HTTP Endpoint
