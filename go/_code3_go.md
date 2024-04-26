@@ -14,6 +14,7 @@ go get -u github.com/pip-services4/pip-services4-go/pip-services4-container-go@l
 
 go get -u github.com/pip-services4/pip-services4-go/pip-services4-components-go@latest
 
+go get -u github.com/pip-services4/pip-services4-go/pip-services4-mysql-go@latest
 ```
 
 Data object
