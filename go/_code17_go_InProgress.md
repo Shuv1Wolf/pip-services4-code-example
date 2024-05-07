@@ -40,6 +40,9 @@ component1.MyTask()
 ```
 import (
     cref "github.com/pip-services4/pip-services4-go/pip-services4-components-go/refer"
-    clock "github.com/pip-services3-gox/pip-services3-components-gox/lock"
-)
+    ccontext "github.com/pip-services4/pip-services4-go/pip-services4-components-go/context"
+) ?????
+```
+
+
 ```
