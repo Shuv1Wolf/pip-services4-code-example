@@ -127,21 +127,29 @@ fmt.Println("Created Dummy with ID: " + item.Id)
 ```
 
 ```
-page, _ := persistence.GetPageByFilter(context.Background(), cquery.NewFilterParamsFromTuples("id", "id 1", "key", "key 2"), cquery.NewPagingParams(0, 1, true))
+// get one item
+result, _ = persistence.GetPageByFilter(context.Background(), cdata.NewFilterParamsFromTuples("key", "key 2"), cdata.NewPagingParams(0, nil, nil))
+
+page, _ = persistence.GetPageByFilter(context.Background(), cdata.NewFilterParamsFromTuples("key", "key 2"), cdata.NewPagingParams(0, 0, false))
 
 fmt.Printf("Has %v items \n", page.Total)
 for _, v := range page.Data {
-	fmt.Printf("%v, %v, %v \n", v.Id, v.Key, v.Content)
+	fmt.Printf("%v , %v, %v \n", v.Id, v.Key, v.Content)
 }
+
+
 ```
 
 ```
-// all items
+// get all items
+page, _ = persistence.GetPageByFilter(correlationId, nil, cdata.NewPagingParams(0, nil, true))
 
-items := persistence.Items
-for _, v := range items {
-	fmt.Printf("%v, %v, %v \n", v.Id, v.Key, v.Content)
+fmt.Printf("Has %v items \n", *page.Total)
+for _, v := range page.Data {
+	fmt.Printf("%v , %v, %v \n", v.Id, v.Key, v.Content)
 }
+
+
 ```
 
 ```
@@ -149,17 +157,46 @@ result, _ := persistence.Update(context.Background(), Dummy{"id 1", "key 2", "ne
 ```
 
 ```
-import (
-    cdata "github.com/pip-services4/pip-services4-go/pip-services4-commons-go/data"
-)
+// get all items
+result, _ = persistence.GetPageByFilter(context.Background(), cdata.NewFilterParamsFromTuples("id", "id 1"), cdata.NewPagingParams(0, 3, false))
 
+fmt.Printf("Has %v items \n", page.Total)
+for _, v := range page.Data {
+	fmt.Printf("%v , %v, %v \n", v.Id, v.Key, v.Content)
+}
+
+```
+
+```
 // update patially
 updateMap := cdata.NewAnyValueMap(map[string]interface{}{"content": "new new content 2"})
-item, _ = persistence.UpdatePartially(context.Background(), "id 1", *updateMap)
+item, _ := persistence.UpdatePartially(context.Background(), "id 1", updateMap)
 
 fmt.Printf("%v , %v, %v \n", item.Id, item.Key, item.Content)
+
+```
+
+```
+// get all items
+page, _ = persistence.GetPageByFilter(context.Background(), cdata.NewFilterParamsFromTuples("id", "id 1"), cdata.NewPagingParams(0, nil, true))
+
+fmt.Printf("get all item\n")
+fmt.Printf("Has %v items \n", page.Total)
+for _, v := range page.Data {
+	fmt.Printf("%v , %v, %v \n", v.Id, v.Key, v.Content)
+}
 ```
 
 ```
 result, _ = persistence.DeleteById(context.Background(), "1")
+
+```
+
+```
+// get all item
+page, _ = persistence.GetPageByFilter(context.Background(), cdata.NewFilterParamsFromTuples("id", "1"), cdata.NewPagingParams(0, nil, true))
+
+fmt.Printf("Has %v items \n", page.Total)
+
+
 ```
